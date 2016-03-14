@@ -1,22 +1,9 @@
 
-// BinarySearchTree class
-//
-// CONSTRUCTION: with no initializer
-//
-// ******************PUBLIC OPERATIONS*********************
-// void insert( x )       --> Insert x
-// void remove( x )       --> Remove x (unimplemented)
-// Comparable find( x )   --> Return item that matches x
-// Comparable findMin( )  --> Return smallest item
-// Comparable findMax( )  --> Return largest item
-// boolean isEmpty( )     --> Return true if empty; else false
-// void makeEmpty( )      --> Remove all items
-// void printTree( )      --> Print tree in sorted order
 
 /**
  * Implements an AVL tree.
  * Note that all "matching" is based on the compareTo method.
- * @author Mark Allen Weiss
+ * @author Danny Schick
  */
 public class AvlTree
 {
@@ -51,33 +38,6 @@ public class AvlTree
     public void insert( Comparable x )
     {
         root = insert( x, root );
-    }
-
-    /**
-     * Remove from the tree. Nothing is done if x is not found.
-     * @param x the item to remove.
-     */
-    public void remove( Comparable x )
-    {
-        System.out.println( "Sorry, remove unimplemented" );
-    }
-
-    /**
-     * Find the smallest item in the tree.
-     * @return smallest item or null if empty.
-     */
-    public Comparable findMin( )
-    {
-        return dataAt( findMin( root ) );
-    }
-
-    /**
-     * Find the largest item in the tree.
-     * @return the largest item of null if empty.
-     */
-    public Comparable findMax( )
-    {
-        return dataAt( findMax( root ) );
     }
 
     /**
@@ -120,8 +80,6 @@ public class AvlTree
 
     /**
      * Internal method to get data field.
-     * @param t the node.
-     * @return the data field or null if t is null.
      */
     private Comparable dataAt( Node t )
     {
@@ -162,35 +120,7 @@ public class AvlTree
         return t;
     }
 
-    /**
-     * Internal method to find the smallest item in a subtree.
-     * @param t the node that roots the tree.
-     * @return node containing the smallest item.
-     */
-    private Node findMin( Node t )
-    {
-        if( t == null )
-            return t;
 
-        while( t.left != null )
-            t = t.left;
-        return t;
-    }
-
-    /**
-     * Internal method to find the largest item in a subtree.
-     * @param t the node that roots the tree.
-     * @return node containing the largest item.
-     */
-    private Node findMax( Node t )
-    {
-        if( t == null )
-            return t;
-
-        while( t.right != null )
-            t = t.right;
-        return t;
-    }
 
     /**
      * Internal method to find an item in a subtree.
@@ -242,9 +172,7 @@ public class AvlTree
     }
 
     /**
-     * Rotate binary tree node with left child.
-     * For AVL trees, this is a single rotation for case 1.
-     * Update heights, then return new root.
+     * Rotate a subtree with left child
      */
     private static Node rotateWithLeftChild( Node k2 )
     {
@@ -257,9 +185,7 @@ public class AvlTree
     }
 
     /**
-     * Rotate binary tree node with right child.
-     * For AVL trees, this is a single rotation for case 4.
-     * Update heights, then return new root.
+     * Rotate a subtree with right child
      */
     private static Node rotateWithRightChild( Node k1 )
     {
@@ -272,10 +198,7 @@ public class AvlTree
     }
 
     /**
-     * Double rotate binary tree node: first left child
-     * with its right child; then node k3 with new left child.
-     * For AVL trees, this is a double rotation for case 2.
-     * Update heights, then return new root.
+     * Double rotate with left child
      */
     private static Node doubleWithLeftChild( Node k3 )
     {
@@ -284,10 +207,7 @@ public class AvlTree
     }
 
     /**
-     * Double rotate binary tree node: first right child
-     * with its left child; then node k1 with new right child.
-     * For AVL trees, this is a double rotation for case 3.
-     * Update heights, then return new root.
+     * Double rotate with right child
      */
     private static Node doubleWithRightChild( Node k1 )
     {

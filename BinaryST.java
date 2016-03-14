@@ -31,38 +31,38 @@ public class BinaryST {
 
     }
 
-    public void inOrder(Node parent){
-        if(parent.getLChild() != null){
-            inOrder(parent.getLChild());
+    public void inOrder(Node givenParent){
+        if(givenParent.left != null){
+            inOrder(givenParent.left);
         }
-        System.out.print(parent.getData() + ", ");
-        if(parent.getRChild() != null){
-            inOrder(parent.getRChild());
+        System.out.print(givenParent.data + ", ");
+        if(givenParent.right != null){
+            inOrder(givenParent.right);
         }
     }
 
-    public void postOrder(Node parent){
-        if(parent.getLChild() != null){
-            postOrder(parent.getLChild());
-        } if(parent.getRChild() != null){
-            postOrder(parent.getRChild());
+    public void postOrder(Node givenParent){
+        if(givenParent.left != null){
+            postOrder(givenParent.left);
+        } if(givenParent.right != null){
+            postOrder(givenParent.right);
         }
-        System.out.print(parent.getData() + ", ");
+        System.out.print(givenParent.data + ", ");
     }
 
-    public void preOrder(Node parent){
-        System.out.print(parent.getData() + ", ");
-        if(parent.getLChild() != null){ // if there's at least one child
-            if (parent.getLChild().getLChild() != null || parent.getLChild().getRChild() != null){
-                preOrder(parent.getLChild());
+    public void preOrder(Node givenParent){
+        System.out.print(givenParent.data + ", ");
+        if(givenParent.left != null){ // if there's at least one child
+            if (givenParent.left.left != null || givenParent.left.right != null){
+                preOrder(givenParent.left);
             } else {
-                System.out.print(parent.getLChild().getData() + ", ");
+                System.out.print(givenParent.left.data + ", ");
             }
-        } if(parent.getRChild() != null){
-            if(parent.getRChild().getLChild() != null || parent.getRChild().getRChild() != null){
-                preOrder(parent.getRChild());
+        } if(givenParent.right != null){
+            if(givenParent.right.left != null || givenParent.right.right != null){
+                preOrder(givenParent.right);
             } else {
-                System.out.print(parent.getRChild().getData() + ", ");
+                System.out.print(givenParent.right.data + ", ");
             }
         }
 
@@ -70,33 +70,33 @@ public class BinaryST {
 
     public void printTree(Node t){
         if(t != null){
-            printTree(t.getLChild());
-            System.out.println(t.getData());
-            printTree(t.getRChild());
+            printTree(t.left);
+            System.out.println(t.data);
+            printTree(t.right);
         }
 
     }
 
-    public void printChildren(Node parent){
-        System.out.println("Right: "+ parent.getRChild().getData()+ "Left: "+ parent.getLChild().getData());
+    public void printChildren(Node givenParent){
+        System.out.println("Right: "+ givenParent.right.data+ "Left: "+ givenParent.left.data);
     }
 
 
-    private void placeNode(Node given, Node parent){
-        if(given.getData() <= parent.getData()){
+    private void placeNode(Node given, Node givenParent){
+        if(given.data <= givenParent.data){
             // it should be left child
-            if(parent.getLChild() == null){
-                parent.setLChild(given);
-                given.setParent(parent);
+            if(givenParent.left == null){
+                givenParent.left = given;
+                given.parent = givenParent;
             } else {
-                placeNode(given, parent.getLChild());
+                placeNode(given, givenParent.left);
             }
-        } else if(given.getData() > parent.getData()){
-            if(parent.getRChild() == null){
-                parent.setRChild(given);
-                given.setParent(parent);
+        } else if(given.data > givenParent.data){
+            if(givenParent.right == null){
+                givenParent.right = given;
+                given.parent = givenParent;
             } else {
-                placeNode(given, parent.getRChild());
+                placeNode(given, givenParent.right);
             }
 
         }

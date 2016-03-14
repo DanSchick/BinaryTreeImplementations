@@ -3,6 +3,9 @@
  */
 public class main {
     public static void main(String[] args){
+        // This will calculate the runtime for various insertions
+
+        // INSERTIONS FOR BST
         long startTime = System.nanoTime();
         BinaryST tree = new BinaryST('i');
         long elapsedTime = System.nanoTime() - startTime;
@@ -15,6 +18,7 @@ public class main {
         seconds = (double)elapsedTime / 1000000000.0;
         System.out.println("Time taken for inserting into a BST by random number: " + seconds + "s");
 
+        // INSERTIONS FOR AVL TREE
 
         startTime = System.nanoTime();
         AvlTree avlTree = new AvlTree('i');
@@ -27,5 +31,19 @@ public class main {
         elapsedTime = System.nanoTime() - startTime;
         seconds = (double)elapsedTime / 1000000000.0;
         System.out.println("Time taken for inserting into a AVL Tree by random number: " + seconds + "s");
+
+        // INSERTIONS FOR SPLAY TREE
+
+        startTime = System.nanoTime();
+        SplayTree splayTree = new SplayTree('i');
+        elapsedTime = System.nanoTime() - startTime;
+        seconds = (double)elapsedTime / 1000000000.0;
+        System.out.println("Time taken for inserting into a Splay Tree by increasing number: " + seconds + "s");
+
+        startTime = System.nanoTime();
+        splayTree = new SplayTree('r');
+        elapsedTime = System.nanoTime() - startTime;
+        seconds = (double)elapsedTime / 1000000000.0;
+        System.out.println("Time taken for inserting into a Splay Tree by random number: " + seconds + "s");
     }
 }
