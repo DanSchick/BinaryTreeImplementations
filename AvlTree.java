@@ -1,19 +1,42 @@
-
+import java.util.ArrayList;
 
 /**
  * Implements an AVL tree.
- * Note that all "matching" is based on the compareTo method.
- * @author Danny Schick
  */
 public class AvlTree
 {
+
+    public ArrayList<Integer> nodeDataArr = new ArrayList<>();
     /**
      * Construct the tree.
      */
     public AvlTree(char arg)
     {
         Node insertNode;
-        if(arg == 'r'){
+        if(arg == 'S'){
+            // searching exercise with 1000 nodes
+            double randomNum = (double)Math.random() * 50000;
+            root = new Node((int)randomNum);
+            for(int i=0;i<1000;i++){
+                randomNum = (double)Math.random() * 50000;
+                int num = (int)randomNum;
+                nodeDataArr.add(num);
+                insertNode = new Node(num);
+                insert(insertNode.data, root);
+            }
+        } else if(arg == 's') {
+            // searching exercise with 100 nodes
+            double randomNum = (double) Math.random() * 50000;
+            root = new Node((int) randomNum);
+            for (int i = 0; i < 100; i++) {
+                randomNum = (double) Math.random() * 50000;
+                int number = (int) randomNum;
+                nodeDataArr.add(number);
+                insertNode = new Node(number);
+                insert(insertNode.data, root);
+            }
+        }
+            else if(arg == 'r'){
             // randomized inputs
             double randomNum = (double)Math.random() * 50000;
             root = new Node((int)randomNum);
@@ -33,7 +56,6 @@ public class AvlTree
 
     /**
      * Insert into the tree; duplicates are ignored.
-     * @param x the item to insert.
      */
     public void insert( Comparable x )
     {
@@ -42,40 +64,10 @@ public class AvlTree
 
     /**
      * Find an item in the tree.
-     * @param x the item to search for.
-     * @return the matching item or null if not found.
      */
     public Comparable find( Comparable x )
     {
         return dataAt( find( x, root ) );
-    }
-
-    /**
-     * Make the tree logically empty.
-     */
-    public void makeEmpty( )
-    {
-        root = null;
-    }
-
-    /**
-     * Test if the tree is logically empty.
-     * @return true if empty, false otherwise.
-     */
-    public boolean isEmpty( )
-    {
-        return root == null;
-    }
-
-    /**
-     * Print the tree contents in sorted order.
-     */
-    public void printTree( )
-    {
-        if( isEmpty( ) )
-            System.out.println( "Empty tree" );
-        else
-            printTree( root );
     }
 
     /**

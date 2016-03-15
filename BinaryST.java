@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 /**
  * Created by Danny on 3/2/2016.
@@ -6,12 +7,61 @@ public class BinaryST {
     BinaryST(){
 
     }
+    public ArrayList<Integer> nodeDataArr = new ArrayList<>();
+
     public BinaryST(Node newRoot){
+
         root = newRoot;
+    }
+
+    public BinaryST(String nodeString){
+        String[] strList =nodeString.split(",");
+        for(String str : strList){
+            //System.out.println(str);
+            break;
+        }
+        int[] intList = new int[strList.length];
+        int counter = 0;
+        for(String str : strList){
+            intList[counter] = Integer.parseInt(str);
+            counter += 1;
+            //System.out.println(intList[counter]);
+        }
+        this.root = new Node(intList[0]);
+        for(int i=1;i<intList.length;i++){
+            Node toPlace = new Node(intList[i]);
+            //System.out.println(toPlace.getData());
+            placeNode(toPlace, root);
+
+        }
+
     }
     public BinaryST(char arg){
         Node insertNode;
-        if(arg == 'r'){
+        if(arg == 'S'){
+            // searching exercise with 1000 nodes
+            double randomNum = (double)Math.random() * 50000;
+            root = new Node((int)randomNum);
+            for(int i=0;i<1000;i++){
+                randomNum = (double)Math.random() * 50000;
+                int num = (int)randomNum;
+                nodeDataArr.add(num);
+                insertNode = new Node(num);
+                placeNode(insertNode, root);
+            }
+        } else if(arg == 's'){
+            // searching exercise with 100 nodes
+            double randomNum = (double)Math.random() * 50000;
+            root = new Node((int)randomNum);
+            for(int i=0;i<100;i++){
+                randomNum = (double)Math.random() * 50000;
+                int number = (int) randomNum;
+                nodeDataArr.add(number);
+                insertNode = new Node(number);
+                placeNode(insertNode, root);
+            }
+
+        } else if(arg == 'r'){
             // randomized inputs
             double randomNum = (double)Math.random() * 50000;
             root = new Node((int)randomNum);
@@ -102,6 +152,25 @@ public class BinaryST {
         }
 
 
+    }
+
+    public Node find(int x, Node curNode){
+        // we have to find the node containing x
+        if(curNode == null){
+            throw new RuntimeException("Item not found!");
+        }
+        else if(curNode.data == x){
+            return curNode;
+        }
+        else {
+            if(x > curNode.data){
+                find(x, curNode.right);
+            } else {
+                find(x, curNode.left);
+            }
+
+        }
+        return null;
     }
 
 

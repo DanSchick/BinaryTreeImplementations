@@ -2,10 +2,13 @@
  *  Java Program to Implement SplayTree
  **/
 
+import java.util.ArrayList;
+
 /** Class SplayTree **/
 class SplayTree
 {
     private Node root;
+    public ArrayList<Integer> nodeDataArr = new ArrayList<>();
 
     /** Constructor **/
     public SplayTree()
@@ -15,7 +18,31 @@ class SplayTree
 
     public SplayTree(char args){
         Node insertNode;
-        if(args == 'r'){
+
+        if(args == 'S'){
+            // searching exercise with 1000 nodes
+            double randomNum = (double)Math.random() * 50000;
+            root = new Node((int)randomNum);
+            for(int i=0;i<1000;i++){
+                randomNum = (double)Math.random() * 50000;
+                int num = (int)randomNum;
+                nodeDataArr.add(num);
+                insertNode = new Node(num);
+                insert(insertNode.data);
+            }
+        } else if(args == 's') {
+            // searching exercise with 100 nodes
+            double randomNum = (double) Math.random() * 50000;
+            root = new Node((int) randomNum);
+            for (int i = 0; i < 100; i++) {
+                randomNum = (double) Math.random() * 50000;
+                int number = (int) randomNum;
+                nodeDataArr.add(number);
+                insertNode = new Node(number);
+                insert(insertNode.data);
+            }
+        }
+        else if(args == 'r'){
             // randomized inputs
             double randomNum = (double)Math.random() * 50000;
             root = new Node((int)randomNum);
@@ -33,17 +60,6 @@ class SplayTree
         }
     }
 
-    /** Function to check if tree is empty **/
-    public boolean isEmpty()
-    {
-        return root == null;
-    }
-
-    /** clear tree **/
-    public void clear()
-    {
-        root = null;
-    }
 
     /** function to insert.data */
     public void insert(int ele)
@@ -69,6 +85,7 @@ class SplayTree
             p.left = z;
         Splay(z);
     }
+
     /** rotate **/
     public void makeLeftChildParent(Node c, Node p)
     {
@@ -162,7 +179,7 @@ class SplayTree
 
 
     /** Functions to search for an.data **/
-    public boolean search(int val)
+    public boolean find(int val)
     {
         return findNode(val) != null;
     }
